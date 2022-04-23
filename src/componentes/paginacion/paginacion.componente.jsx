@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { nextPage, previousPage } from '../../actions/characters.actions';
 import './paginacion.css';
 
 /**
@@ -9,10 +11,16 @@ import './paginacion.css';
  * @returns un JSX element 
  */
 const Paginacion = () => {
-
+    const dispatch = useDispatch();
+    const state = useSelector(state=>state.charactersReducer)
+    
+    
+    let isPrev = state.info?.prev? false:true;
+    let isNext = state.info?.next? false:true;
+   
     return <div className="paginacion">
-        <button disabled={true} className={"primary"}>Anterior</button>
-        <button disabled={false} className={"primary"}>Siguiente</button>
+        <button disabled={isPrev} className={"primary"} onClick={() => dispatch(previousPage())} >Anterior</button>
+        <button disabled={isNext} className={"primary"} onClick={() => dispatch(nextPage())} >Siguiente</button>
     </div>
 }
 

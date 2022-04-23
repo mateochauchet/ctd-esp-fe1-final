@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import { getCharactersByName } from '../../service/characters.service';
+import { useSelector } from '../../store/store';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
 
@@ -9,12 +12,15 @@ import TarjetaPersonaje from './tarjeta-personaje.componente';
  * 
  * @returns un JSX element 
  */
-const GrillaPersonajes = () => {
-
+const GrillaPersonajes = ({array}) => {
+    
+   
     return <div className="grilla-personajes">
-       <TarjetaPersonaje />
-       <TarjetaPersonaje />
-       <TarjetaPersonaje />
+        {
+            array && 
+            array.map(el => <TarjetaPersonaje character={el} />)
+        }
+       
     </div>
 }
  
