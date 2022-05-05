@@ -1,5 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { nextPage, previousPage } from '../../actions/characters.actions';
+import { useSelector } from '../../store/store';
 import './paginacion.css';
 
 /**
@@ -10,7 +12,7 @@ import './paginacion.css';
  * 
  * @returns un JSX element 
  */
-const Paginacion = () => {
+const Paginacion:FC = () => {
     const dispatch = useDispatch();
     const state = useSelector(state=>state.charactersReducer)
     

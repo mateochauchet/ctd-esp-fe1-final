@@ -1,5 +1,12 @@
 
+import { FC } from 'react';
 import './boton-favorito.css';
+
+
+interface BotonFavoritoProps {
+    esFavorito:boolean;
+}
+
 /**
  * Boton que indica si un elemento es favorito o no, y da la posibilidad de marcarlo/desmarcarlo
  * 
@@ -8,7 +15,7 @@ import './boton-favorito.css';
  * 
  * @returns un JSX element 
  */
-const BotonFavorito = ({esFavorito}) => {
+const BotonFavorito:FC<BotonFavoritoProps> = ({esFavorito}:BotonFavoritoProps) => {
 
     
 

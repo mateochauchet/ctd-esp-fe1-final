@@ -13,7 +13,7 @@ interface AddFavoriteAction extends Action {
 
 interface RemoveFavoriteAction extends Action {
     type:'REMOVE_FAVORITE';
-    id:number;
+    character:Character;
 }
 
 interface RemoveAllAction extends Action {
@@ -31,10 +31,10 @@ export const addFavorite:ActionCreator<AddFavoriteAction> = (character:Character
     }
 }
 
-export const removeFavorite:ActionCreator<RemoveFavoriteAction> = (id:number) => {
+export const removeFavorite:ActionCreator<RemoveFavoriteAction> = (character:Character) => {
     return {
         type:'REMOVE_FAVORITE',
-        id:id
+        character:character,
     }
 }
 

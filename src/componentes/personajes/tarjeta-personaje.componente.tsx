@@ -2,7 +2,16 @@ import { useDispatch } from 'react-redux';
 import { addFavorite, removeFavorite } from '../../actions/favorites.actions';
 import BotonFavorito from '../botones/boton-favorito.componente';
 import './tarjeta-personaje.css';
+import { FC } from 'react';
+import { Character } from '../../types/character.types';
 import { useSelector } from '../../store/store';
+import { getCharacter, getCharacterViewThunk } from '../../actions/characterView.actions';
+import { NavLink } from 'react-router-dom';
+
+
+interface TarjetaPersonajeProps {
+    character: Character;
+}
 
 
 /**
@@ -13,28 +22,21 @@ import { useSelector } from '../../store/store';
  * 
  * @returns un JSX element 
  */
-const TarjetaPersonaje = ({character}) => {
+const TarjetaPersonaje:FC<TarjetaPersonajeProps> = ({character}:TarjetaPersonajeProps) => {
     const dispatch = useDispatch();
-    
 
-    const {favoritesList} = useSelector(state=>state.favoritesReducer);
-
-    const isFavorite = favoritesList.find(el=>el.id === character.id)? true : false
+    //const isFavorite = favoritesList.find(el=>el.id === character.id)? true : false
     
     const handleClick = () => {
-        isFavorite ? dispatch(removeFavorite(character.id))
-        :
         dispatch(addFavorite(character));
-
-        console.log(isFavorite)
     }
 
     return <div className="tarjeta-personaje">
         <img src={character.image} alt={`${character.name} image`}/>
         <div className="tarjeta-personaje-body" >
-            <span>{character.name}</span>
+            <NavLink to='detalle' ><span onClick={()=>dispatch(getCharacterViewThunk(character))} >{character.name}</span></NavLink> 
             <div onClick={handleClick} >
-                <BotonFavorito esFavorito={isFavorite}  />
+                <BotonFavorito esFavorito={character.favorite}  />
             </div>
         </div>
     </div>

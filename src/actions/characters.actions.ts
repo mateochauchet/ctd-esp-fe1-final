@@ -15,7 +15,6 @@ interface Search extends Action {
 
 interface GetCharactersAction extends  Action {
     type: 'GET_CHARACTERS';
-    payload:string;
 }
 
 interface GetCharactersSuccessAction extends  Action {
@@ -52,10 +51,9 @@ export const search: ActionCreator<Search> = (name:string) => {
     }
 } 
 
-const getCharacters: ActionCreator<GetCharactersAction> = (name:string) => {
+const getCharacters: ActionCreator<GetCharactersAction> = () => {
     return {
         type:'GET_CHARACTERS',
-        payload:name,
     }
 }
 
@@ -92,7 +90,7 @@ export const resetFilters: ActionCreator<ResetFiltersAction> = () => {
     }
 }
 
-
+//  EXPORT ACTIONS TYPE
 export type CharactersActions = ReturnType<typeof getCharacters> | ReturnType<typeof getCharactersSuccess> | ReturnType<typeof getCharactersFailed> | ReturnType<typeof nextPage> | ReturnType<typeof previousPage> | ReturnType<typeof resetFilters> | ReturnType<typeof search> ;
 
 
@@ -101,13 +99,14 @@ interface getCharactersThunkAction extends ThunkAction<void, IRootState, unknown
 
 //THUNK ACTION
 
-export const getCharactersThunk = (value:string): getCharactersThunkAction => {
+export const getCharactersThunk = (): getCharactersThunkAction => {
     return async (dispatch, getState) => {
-        dispatch(getCharacters(value));
+        dispatch(getCharacters());
         const {page,actualSearch} = getState().charactersReducer;
         try {
             const res = await getCharactersByName(actualSearch, page);
             const info = res.info;
+            res.results.map(el => el.favorite = false)
             const charactersList:Character[] = res.results;
             dispatch(getCharactersSuccess(charactersList,info))
         } catch (error) {

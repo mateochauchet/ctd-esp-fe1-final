@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getCharactersThunk, nextPage, search } from '../../actions/characters.actions';
+import { getCharactersThunk, search } from '../../actions/characters.actions';
 import { useSelector } from '../../store/store';
 import './filtros.css';
 
-const Filtros = () => {
+
+/**
+ * Input Buscador para poder Filtrar a los personajes por nombre
+ * @returns  un JSX element
+ */
+
+const Filtros:FC = () => {
     const dispatch = useDispatch();
     const {page, actualSearch} = useSelector(state=>state.charactersReducer)
     
@@ -14,7 +20,7 @@ const Filtros = () => {
     }, [page,actualSearch]);
 
     return <div className="filtros">
-        <label for="nombre">Filtrar por nombre:</label>
+        <label htmlFor="nombre">Filtrar por nombre:</label>
         <input type="text" placeholder="Rick, Morty, Beth, Alien, ...etc" name="nombre" onChange={(e)=>dispatch(search(e.target.value))} value={actualSearch} />
     </div>
 }

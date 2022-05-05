@@ -4,11 +4,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { charactersReducer } from "../reducers/characters.reducer";
 import {favoritesReducer} from '../reducers/favorites.reducer';
+import {characterViewReducer} from '../reducers/characterView.reducer'
 
 
 const rootReducers = combineReducers({
     charactersReducer,
-    favoritesReducer
+    favoritesReducer,
+    characterViewReducer,
 });
 
 

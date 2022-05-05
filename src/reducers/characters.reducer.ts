@@ -1,6 +1,7 @@
 import { info } from "console";
 import { Reducer } from "redux";
 import { CharactersActions } from "../actions/characters.actions";
+import { Info } from "../types/api.types";
 import { Character } from "../types/character.types";
 
 
@@ -9,14 +10,13 @@ interface CharactersState {
     actualSearch:string;
     status:'IDLE' | 'LOADING' | 'COMPLETED' | 'FAILED';
     errorMessage: string | null;
-    info:{
-        count:number;
-        pages:number;
-        next?:string | null;
-        prev?:string | null | undefined;
-    };
+    info: Info;
     page:number;
 }
+
+/**
+ * Estado Inicial Personajes reducer
+ */
 
 const initialState: CharactersState = {
     characters:[],
@@ -32,6 +32,11 @@ const initialState: CharactersState = {
     page:1,
 }
 
+/**
+ * Funcion Redux para el estado del listado de personajes   
+ * 
+ * @returns estado del listado de personajes 
+ */
 
 export const charactersReducer:Reducer<CharactersState, CharactersActions> = (state=initialState, action) => {
     switch(action.type){

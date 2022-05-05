@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
 import PaginaInicio from "./paginas/Inicio.pagina";

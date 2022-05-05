@@ -4,6 +4,7 @@ import Paginacion from "../componentes/paginacion/paginacion.componente";
 import { useDispatch } from "react-redux";
 import { resetFilters } from "../actions/characters.actions";
 import { useSelector } from "../store/store";
+import { FC } from "react";
  
 /**
  * Esta es la pagina principal. Aquí se debera ver el panel de filtros junto con la grilla de personajes.
@@ -13,7 +14,7 @@ import { useSelector } from "../store/store";
  * 
  * @returns la pagina de inicio
  */
-const PaginaInicio = () => {
+const PaginaInicio:FC = () => {
     const dispatch = useDispatch();
     const {characters} = useSelector(state => state.charactersReducer)
 
@@ -24,7 +25,7 @@ const PaginaInicio = () => {
         </div>
         <Filtros />
         <Paginacion />
-        <GrillaPersonajes array={characters} />
+        <GrillaPersonajes charactersList={characters} />
         <Paginacion />
     </div>
 }
